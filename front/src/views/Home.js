@@ -11,6 +11,12 @@ function Home(props) {
       })
       .catch((error) => {});
   };
+
+  config.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      console.log(user.email);
+    }
+  });
   return (
     <div>
       <h1>Home</h1>
