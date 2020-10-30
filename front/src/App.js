@@ -15,7 +15,6 @@ function App() {
   config.auth().onAuthStateChanged(function (user) {
     if (user) {
       setCurrentUser(user.l);
-    } else {
     }
   });
   console.log(currentUser);

@@ -18,7 +18,7 @@ function SignUp(props) {
       .auth()
       .createUserWithEmailAndPassword(newEmail, newPassword)
       .then((user) => {
-        props.history.push('/Home');
+        props.history.push("/Home");
       })
       .catch(function (error) {
         var errorCode = error.code;
@@ -26,6 +26,11 @@ function SignUp(props) {
         console.log(errorCode, " ", errorMessage);
       });
   };
+
+  const handleToLogin = () => {
+    props.history.push("/");
+  };
+
   return (
     <div>
       <h1>SignUp</h1>
@@ -37,6 +42,7 @@ function SignUp(props) {
         onChange={handleNewPassword}
       />
       <button onClick={handleClickNewUser}>New User</button>
+      <button onClick={handleToLogin}>Login</button>
     </div>
   );
 }

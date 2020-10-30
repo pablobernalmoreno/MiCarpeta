@@ -27,6 +27,10 @@ function Login(props) {
       });
   };
 
+  const handleToRegister = () => {
+    props.history.push("/SignUp");
+  };
+
   return (
     <div>
       <h1>Login</h1>
@@ -38,6 +42,7 @@ function Login(props) {
         onChange={handleOldPassword}
       />
       <button onClick={handleClickLogin}>Old User</button>
+      <button onClick={handleToRegister}>Register</button>
     </div>
   );
 }
