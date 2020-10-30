@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import config from "../auth/firebaseConfig";
 
 function SignUp(props) {
+  const [userName, setUserName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  const handleNewEmail = (event) => {
-    setNewEmail(event.target.value);
+  const handleName = (event) => {
+    setUserName(event.target.value);
+    setNewEmail(createEmail(userName));
   };
 
   const handleNewPassword = (event) => {
     setNewPassword(event.target.value);
+  };
+
+  const createEmail = (name) => {
+    return `${name.replace(/\s+/g, "").substr(0, 7)}${Math.floor(
+      Math.random() * 10
+    )}@operadorBCQ.com`;
   };
 
   const handleClickNewUser = () => {
@@ -31,11 +39,13 @@ function SignUp(props) {
     props.history.push("/");
   };
 
+  console.log(newEmail);
+
   return (
     <div>
       <h1>SignUp</h1>
       <h2>Cuenta nueva</h2>
-      <input type="text" placeholder="Correo nuevo" onChange={handleNewEmail} />
+      <input type="text" placeholder="Nombre" onChange={handleName} />
       <input
         type="text"
         placeholder="Contraseña nueva"
