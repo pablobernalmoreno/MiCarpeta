@@ -1,0 +1,11 @@
+.homeHeader {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.signOutContainer {
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
