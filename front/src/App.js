@@ -9,14 +9,17 @@ import Login from "./views/Login";
 
 export const history = createHistory();
 
+
+
 function App() {
   const [currentUser, setCurrentUser] = useState();
 
   config.auth().onAuthStateChanged(function (user) {
     if (user) {
       setCurrentUser(user.l);
-    } 
+    }
   });
+
   return (
     <Router>
       <Switch>
