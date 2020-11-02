@@ -53,12 +53,20 @@ function Home(props) {
     }
   };
 
-  const handleUpload = () => {
+  const createDoc = async () => {
+    await thingsRef.set({
+      name: "Titulo",
+      url: url,
+      uid: userId,
+      createdAt: Date.now(),
+    });
+  };
+
+  const handleUpload = async () => {
     const uploadTask = imagestorage
       .ref(`${userEmail}/${image?.name}`)
       .put(image);
-    console.log(uploadTask);
-    uploadTask.on(
+    await uploadTask.on(
       "state_changed",
       (snapshot) => {
         const progress = Math.round(
@@ -80,15 +88,6 @@ function Home(props) {
     );
   };
 
-  const createDoc = () => {
-    thingsRef.set({
-      name: "Titulo",
-      url: url,
-      uid: userId,
-      createdAt: Date.now(),
-    });
-  };
-
   const showDocs = () => {
     thingsRef
       .get()
@@ -103,8 +102,6 @@ function Home(props) {
         console.log("Error getting document:", error);
       });
   };
-
-  console.log(documents);
 
   return (
     <div>
@@ -140,7 +137,11 @@ function Home(props) {
         <ContainedButton onClick={handleUpload} title="upload" />
         <ContainedButton onClick={showDocs} title="Show docs" />
         {documents.map((document) => {
-          return <a href={document.url}>{document.name}</a>;
+          return (
+            <a href={document.url} key={document.name}>
+              {document.name}
+            </a>
+          );
         })}
       </div>
     </div>
