@@ -12,7 +12,7 @@ function SignUp(props) {
   const [userName, setUserName] = useState("");
   const [address, setAdress] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isError, setError] = useState(false);
 
@@ -31,9 +31,9 @@ function SignUp(props) {
     setNewEmail(createEmail(userName));
   };
 
-  const handleNewPassword = (event) => {
-    setNewPassword(event.target.value);
-  };
+  // const handleNewPassword = (event) => {
+  //   setNewPassword(event.target.value);
+  // };
 
   const handelAddress = (event) => {
     setAdress(event.target.value);
@@ -60,8 +60,16 @@ function SignUp(props) {
       .then(() => {
         config
           .auth()
-          .createUserWithEmailAndPassword(newEmail, newPassword)
+          .createUserWithEmailAndPassword(newEmail, identification)
           .then((user) => {
+            const currentUser = config.auth().currentUser;
+
+            currentUser
+              .updateProfile({
+                displayName: identification,
+              })
+              .then(function () {})
+              .catch(function (error) {});
             props.history.push("/Home");
           })
           .catch(function (error) {
@@ -133,14 +141,14 @@ function SignUp(props) {
             type="text"
           />
         </div>
-        <div className="textfieldSignUp">
+        {/* <div className="textfieldSignUp">
           <SimpleTextField
             title="Contraseña*"
             onChange={handleNewPassword}
             variant="outlined"
             type="password"
           />
-        </div>
+        </div> */}
         <div className="buttonSignUp">
           <ContainedButton onClick={handleClickNewUser} title="Register" />
         </div>
