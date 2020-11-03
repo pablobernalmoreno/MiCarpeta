@@ -22,7 +22,10 @@ function Login(props) {
       .auth()
       .signInWithEmailAndPassword(oldEmail, oldPassword)
       .then((user) => {
-        props.history.push("/Home");
+          props.history.push({
+              pathname: '/Home',
+              state: { email: user.user.email, id: user.user.displayName }
+            })
       })
       .catch(function (error) {
         var errorCode = error.code;

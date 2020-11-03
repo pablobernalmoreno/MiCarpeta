@@ -63,14 +63,25 @@ function SignUp(props) {
           .createUserWithEmailAndPassword(newEmail, identification)
           .then((user) => {
             const currentUser = config.auth().currentUser;
-
+            let userData = { mail: newEmail, docs: [] }
+            axios
+              .post("https://micarpeta-b07f1.firebaseio.com/users/" + identification + ".json", userData)
+              .then(res => {
+                console.log(res);
+              })
+              .catch(err =>
+                console.log(err)
+              );
             currentUser
               .updateProfile({
                 displayName: identification,
               })
-              .then(function () {})
-              .catch(function (error) {});
-            props.history.push("/Home");
+              .then(function () { })
+              .catch(function (error) { });
+            props.history.push({
+              pathname: '/Home',
+              state: { email: newEmail, id: identification }
+            })
           })
           .catch(function (error) {
             var errCode = error.code;
@@ -102,6 +113,7 @@ function SignUp(props) {
             setErrorMessage("Hubo un error inesperado, intenta otra vez!");
           });
       });
+
   };
 
   const handleToLogin = () => {

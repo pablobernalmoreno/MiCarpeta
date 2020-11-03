@@ -1,8 +1,5 @@
 .homeHeader {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
+  text-align-last: center;
 }
 .signOutContainer {
   width: 150px;

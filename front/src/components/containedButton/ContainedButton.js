@@ -10,6 +10,7 @@ export default function ContainedButton(props) {
         variant="contained"
         color="primary"
         onClick={props.onClick}
+        disabled={props.disabled}
       >
         {props.title}
       </Button>
